@@ -1,7 +1,7 @@
 #include "header.h"
 
 
-void main(void){
+int main(void){
 
 	srand(time(NULL));
 	
@@ -13,7 +13,8 @@ void main(void){
 	
 	ClearScreen();
 	init_player(p1);
-	
+
+	return 0;
 }
 	
 	
