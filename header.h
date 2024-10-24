@@ -3,6 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
+#include <termios.h>
 
 typedef enum { DEFENDER, ASSASSIN, WARRIOR, MAGE } T_Roles;
 
@@ -23,3 +24,4 @@ void init_player(Player* p);
 //utility.c
 void vide_buffer();
 void ClearScreen();
+int getch();
