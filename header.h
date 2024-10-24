@@ -9,10 +9,11 @@ typedef enum { DEFENDER, ASSASSIN, WARRIOR, MAGE } T_Roles;
 typedef struct{
 	char name[30];
 	T_Roles role;
-	short attack;
-	short defense;
+	short hp;
+	short att;
+	short def;
 	short crit_chance;
-	short crit_damage;
+	short crit_dmg;
 	short dodge;
 } Player;
 
