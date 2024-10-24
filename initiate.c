@@ -31,57 +31,59 @@ T_Roles choose_role() {
 
     choice2 = 1;
 
-    printf("Choose your class :\n\n 1. TANK \n 2. ASSASSIN \n 3. WARRIOR \n 4. "
-         "MAGE \n\n");
-
+    printf("\nChoose your class :\n\n 1. TANK \n 2. ASSASSIN \n 3. WARRIOR \n 4. MAGE \n\n");
+    
     while (choice) {
-      verif = scanf("%d", &role);
-      role--;
-      vide_buffer();
-      switch (role) {
+      role = getch();
 
-        case 0 : 
-        case 1 :
-        case 2 :
-        case 3 :
+      switch(role){
+
+        case '1':
           choice = 0;
+          ClearScreen();
+          printf("You are now a Tank !\nTank have a high defense and hp but low attack and crit chance !\n\n");
+          sleep(7);
+          ClearScreen();
+          break;
+
+        case '2':
+          choice = 0;
+          ClearScreen();
+          printf("You are now an Assassin !\nAssassin have a high crit chance and attack chance but low defense and hp !\n\n");
+          sleep(8);
+          ClearScreen();
+          break;
+
+        case '3':
+          choice = 0;
+          ClearScreen();
+          printf("You are now a Warrior !\nWarrior is an very equilibrate class !\n\n");
+          sleep(5);
+          ClearScreen();
+          break;
+
+        case '4':
+          choice = 0;
+          ClearScreen();
+          printf("You are now a Mage !\nMage have a high attack and hp but low defense !\n\n");
+          sleep(6);
+          ClearScreen();
           break;
 
         default:
           ClearScreen();
-          printf("Please choose a valid role (type 1, 2, 3 or 4) ! \n\n");
-          sleep(3);
-          ClearScreen();
-          printf("Choose your class :\n\n 1. TANK \n 2. ASSASSIN \n 3. WARRIOR \n 4. MAGE \n\n");
+          printf("\nChoose pidi your class :\n\n 1. TANK \n 2. ASSASSIN \n 3. WARRIOR \n 4. MAGE \n\n");
           break;
       }
     }
-    ClearScreen();
-    switch(role){
-      case 0:
-        printf("You are now a Tank !\nTank have a high defense and hp but low attack and crit chance !\n\n");
-        sleep(7);
-        break;
-      case 1:
-        printf("You are now an Assassin !\nAssassin have a high crit chance and attack chance but low defense and hp !\n\n");
-        sleep(8);
-        break;
-      case 2:
-        printf("You are now a Warrior !\nWarrior is an very equilibrate class !\n\n");
-        sleep(5);
-        break;
-      case 3:
-        printf("You are now a Mage !\nMage have a high attack and hp but low defense !\n\n");
-        sleep(6);
-        break;
-    }
-    ClearScreen();
+
+    role = role - '0';
+    role--;
     
     printf("Do you want to change your class ? (Y/N)\n\n");
 
     while (choice2) {
-      verif = scanf("%c", &choice3);
-      vide_buffer();
+      choice3 = getch();
       switch (choice3) {
 
         case 'Y':
@@ -102,9 +104,6 @@ T_Roles choose_role() {
           break;
 
         default:
-          ClearScreen();
-          printf("Please type a valid choice (Y or N ) ! \n\n");
-          sleep(3);
           ClearScreen();
           printf("Do you want to change your class ? (Y/N)\n\n");
           break;
@@ -175,21 +174,22 @@ void init_player(Player *p){
 
   char choice = 1;
   char choice2;
-  int verif;
+  char verif;
 
   while(choice){
-    verif = scanf("%c", &choice2);
-    vide_buffer();
+    choice2 = getch();
     switch (choice2) {
 
       case 'Y':
       case 'y':
+        choice = 0;
+        verif = getch();
+        while(verif != 'q' && verif != 'Q'){
+          ClearScreen();
+          printf("Ok ! There is : \n\n");
+          printf(" HP : %d \n Attack : %d\n Defense : %d\n Crit chance : %d %%\n Crit damage : %d %%\n Dodge chance : %d %%\n\n\nPress Q to quit. ", p->hp, p->att, p->def, p->crit_chance, p->crit_dmg, p->dodge);
+        }
         ClearScreen();
-        printf("Ok ! I let you 12 secondes to see them... \n\n");
-        printf(" HP : %d \n Attack : %d\n Defense : %d\n Crit chance : %d %%\n Crit damage : %d %%\n Dodge chance : %d %%\n ", p->hp, p->att, p->def, p->crit_chance, p->crit_dmg, p->dodge);
-        sleep(12);
-        ClearScreen();
-        printf("Do you want to see again your stats ? (Y/N)\n\n");
         break;
       
       case 'N':
@@ -212,7 +212,3 @@ void init_player(Player *p){
     
   }
 }
-
-
-
-
