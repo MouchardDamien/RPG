@@ -9,8 +9,11 @@ initiate.o: initiate.c header.h
 utility.o: utility.c header.h 
 	gcc -c utility.c -o utility.o
 
-exec: main.o utility.o initiate.o
-	gcc main.o utility.o initiate.o -o exec 
+menu.o: menu.c header.h 
+	gcc -c menu.c -o menu.o
+
+exec: main.o utility.o initiate.o menu.o
+	gcc main.o utility.o initiate.o menu.o -o exec 
 
 clean: 
 	rm *.o
