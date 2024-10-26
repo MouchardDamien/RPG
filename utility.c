@@ -5,8 +5,12 @@ void vide_buffer(){
 	}
 }
 
-void ClearScreen(){ 
-	printf("\033[H\033[J");
+void ClearScreen() {
+	#ifdef _WIN32
+		system("cls");  // Commande pour Windows
+	#else
+		system("clear"); // Commande pour Linux/macOS
+	#endif
 }
 
 int getch(void) { 
