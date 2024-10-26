@@ -1,7 +1,7 @@
 #include "header.h"
 
 void choose_name(char name[30]) {
-  printf("Choose the name of your character (30 letters max !) : \n\n");
+  printf("Choose the name of your character (30 letters max !) : \n\n\n");
   scanf("%s", name);
   vide_buffer();
   ClearScreen();
@@ -9,9 +9,9 @@ void choose_name(char name[30]) {
   char critic_name = rand() % 2;
 
   if (critic_name == 0) {
-    printf("Ok ! '%s' is a beautifull name ! \n\n", name);
+    printf("Oh ! It's a beautifull name ! \n\n");
   } else {
-    printf("Hum... ok. '%s' is an... hum... original name. \n\n", name);
+    printf("Hum... ok. It's an... original name. \n\n");
   }
 
   sleep(4);
@@ -25,7 +25,7 @@ T_Roles choose_role() {
   char change = 1;
   char choice3;
   int verif;
-  T_Roles role;
+  char role;
 
   while(change){
 
@@ -41,7 +41,7 @@ T_Roles choose_role() {
         case '1':
           choice = 0;
           ClearScreen();
-          printf("You are now a Tank !\nTank have a high defense and hp but low attack and crit chance !\n\n");
+          printf("You are now a Tank !\nTank have a high defense and hp but low attack and crit chance and speed !\n\n");
           sleep(7);
           ClearScreen();
           break;
@@ -49,7 +49,7 @@ T_Roles choose_role() {
         case '2':
           choice = 0;
           ClearScreen();
-          printf("You are now an Assassin !\nAssassin have a high crit chance and attack chance but low defense and hp !\n\n");
+          printf("You are now an Assassin !\nAssassin have a high crit chance, speed and attack chance but low defense and hp !\n\n");
           sleep(8);
           ClearScreen();
           break;
@@ -57,7 +57,7 @@ T_Roles choose_role() {
         case '3':
           choice = 0;
           ClearScreen();
-          printf("You are now a Warrior !\nWarrior is an very equilibrate class !\n\n");
+          printf("You are now a Warrior !\nWarrior is a very equilibrate class !\n\n");
           sleep(5);
           ClearScreen();
           break;
@@ -72,7 +72,7 @@ T_Roles choose_role() {
 
         default:
           ClearScreen();
-          printf("\nChoose pidi your class :\n\n 1. TANK \n 2. ASSASSIN \n 3. WARRIOR \n 4. MAGE \n\n");
+          printf("\nChoose your class :\n\n 1. TANK \n 2. ASSASSIN \n 3. WARRIOR \n 4. MAGE \n\n");
           break;
       }
     }
@@ -123,6 +123,10 @@ void init_player(Player *p){
 
   char p_name[30];
 
+  printf("First, create your character !\n\n");
+  sleep(3);
+  ClearScreen();
+  
   choose_name(p_name);
 
   strcpy(p->name, p_name);
@@ -136,6 +140,7 @@ void init_player(Player *p){
       p->crit_chance = 10;
       p->crit_dmg = 50;
       p->dodge = 5;
+      p->speed = 80;
       break;
     
     case 1:
@@ -145,6 +150,7 @@ void init_player(Player *p){
       p->crit_chance = 40;
       p->crit_dmg = 50;
       p->dodge = 15;
+      p->speed = 120;
       break;
     
     case 2:
@@ -154,6 +160,7 @@ void init_player(Player *p){
       p->crit_chance = 15;
       p->crit_dmg = 50;
       p->dodge = 10;
+      p->speed = 100;
       break;
     
     case 3:
@@ -163,6 +170,7 @@ void init_player(Player *p){
       p->crit_chance = 15;
       p->crit_dmg = 50;
       p->dodge = 10;
+      p->speed = 100;
       break;
     
     default:
@@ -173,7 +181,7 @@ void init_player(Player *p){
   printf("Do you want to see your stats ? (Y/N)\n\n");
 
   char choice = 1;
-  char choice2;
+  char choice2 = 1;
   char verif;
 
   while(choice){
@@ -183,11 +191,12 @@ void init_player(Player *p){
       case 'Y':
       case 'y':
         choice = 0;
-        verif = getch();
-        while(verif != 'q' && verif != 'Q'){
+        verif = -1;
+        while(verif != ' '){
           ClearScreen();
           printf("Ok ! There is : \n\n");
-          printf(" HP : %d \n Attack : %d\n Defense : %d\n Crit chance : %d %%\n Crit damage : %d %%\n Dodge chance : %d %%\n\n\nPress Q to quit. ", p->hp, p->att, p->def, p->crit_chance, p->crit_dmg, p->dodge);
+          printf(" HP : %d \n  Attack : %d\n  Defense : %d\n  Crit chance : %d %%\n  Crit damage : %d %%\n  Dodge chance : %d %%\n  Speed : %d\n\nPress space to quit...\n\n ", p->hp, p->att, p->def, p->crit_chance, p->crit_dmg, p->dodge,p->speed);
+          verif = getch();
         }
         ClearScreen();
         break;
@@ -202,13 +211,7 @@ void init_player(Player *p){
         break;
 
       default:
-        ClearScreen();
-        printf("Please type a valid choice (Y or N ) ! \n\n");
-        sleep(3);
-        ClearScreen();
-        printf("Do you want to see your stats ? (Y/N)\n\n");
         break;
     }
-    
   }
 }
