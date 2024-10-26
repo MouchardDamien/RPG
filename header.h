@@ -4,6 +4,7 @@
 #include <time.h>
 #include <unistd.h>
 #include <termios.h>
+#include <sys/ioctl.h>
 
 typedef enum { DEFENDER, ASSASSIN, WARRIOR, MAGE } T_Roles;
 
@@ -16,10 +17,17 @@ typedef struct{
 	short crit_chance;
 	short crit_dmg;
 	short dodge;
+	short speed;
 } Player;
 
 //initiate.c
 void init_player(Player* p);
+
+//menu.c
+char welcome();
+char main_menu();
+void rules();
+void quit();
 
 //utility.c
 void vide_buffer();
